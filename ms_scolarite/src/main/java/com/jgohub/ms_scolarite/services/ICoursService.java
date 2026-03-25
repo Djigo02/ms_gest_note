@@ -10,5 +10,5 @@ public interface ICoursService {
     List<Cours> getAllCourses();
     Cours createCours(CoursEntity cours);
     Cours updateCours(CoursEntity cours);
-    void deleteCoursByMatricule(String matricule);
+    void deleteCoursById(Long id);
 }
