@@ -1,4 +1,4 @@
-package com.jgohub.ms_scolarite.config;
+package com.jgohub.ms_notes.config;
 
 
 import org.springframework.context.MessageSource;

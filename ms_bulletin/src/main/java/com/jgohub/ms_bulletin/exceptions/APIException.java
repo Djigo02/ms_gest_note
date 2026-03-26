@@ -1,4 +1,4 @@
-package com.jgohub.ms_scolarite.exceptions;
+package com.jgohub.ms_bulletin.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

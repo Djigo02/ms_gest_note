@@ -1,4 +1,4 @@
-package com.jgohub.ms_scolarite.config;
+package com.jgohub.ms_bulletin.config;
 
 
 import org.springframework.context.MessageSource;

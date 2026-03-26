@@ -1,11 +1,10 @@
-package com.jgohub.ms_scolarite.exceptions;
-
-import org.springframework.http.HttpStatus;
+package com.jgohub.ms_notes.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.http.HttpStatus;
 
 @Data
 @AllArgsConstructor
