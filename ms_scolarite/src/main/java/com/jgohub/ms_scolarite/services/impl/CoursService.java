@@ -32,7 +32,7 @@ public class CoursService implements ICoursService {
     public Cours findCoursById(Long id) {
         return coursMapper.
                 toCours(coursRepository.findById(id)
-                        .orElseThrow(() -> new RequestException("Ce cours n'existe pas", HttpStatus.BAD_REQUEST)
+                        .orElseThrow(() -> new RequestException("Ce cours n'existe pas", HttpStatus.NOT_FOUND)
                         )
                 );
     }

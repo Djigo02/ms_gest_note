@@ -29,9 +29,11 @@ public class EtudiantService implements IEtudiantService {
     @Override
     @Transactional(readOnly = true)
     public Etudiant getEtudiantByMatricule(String matricule) {
-        return etudiantMapper.toEtudiant(
-                etudiantRepository.findByMatricule(matricule)
-        );
+        EtudiantEntity etudiant =  etudiantRepository.findByMatricule(matricule);
+        if (etudiant == null) {
+            throw new RequestException("Ce etudiant n'existe pas", HttpStatus.NOT_FOUND);
+        }
+        return etudiantMapper.toEtudiant(etudiant);
     }
 
     @Override
