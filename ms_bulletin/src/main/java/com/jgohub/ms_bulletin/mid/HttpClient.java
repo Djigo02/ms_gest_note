@@ -19,7 +19,7 @@ public class HttpClient implements IHttpClient {
 
     @Override
     public Etudiant getEtudiantByMatricule(String matricule) {
-        String baseUrlEtudiant = "http://localhost:8081/scolarite/etudiants";
+        String baseUrlEtudiant = "http://localhost:8081/ms_scolarite/etudiants";
         final ResponseEntity<Etudiant> response = this.restTemplate.exchange(baseUrlEtudiant +'/'+matricule, HttpMethod.GET,null, Etudiant.class);
         if (response.getStatusCode().is4xxClientError()) {
             throw  new RequestException("Etudiant introuvable", HttpStatus.NOT_FOUND);

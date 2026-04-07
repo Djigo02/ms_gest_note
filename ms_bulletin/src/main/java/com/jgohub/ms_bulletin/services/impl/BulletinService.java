@@ -28,12 +28,11 @@ public class BulletinService implements IBulletinServices {
 
     @Override
     public Bulletin createBulletin(String matricule) {
-
         // Vérifier si étudiant existe (local ou distant)
         EtudiantRefEntity etudiant = iEtudiantRepository.findByMatricule(matricule);
 
         if (etudiant == null) {
-            throw new RequestException("Etudiant introuvable", HttpStatus.BAD_REQUEST);
+            throw new RequestException("Etudiant {"+ matricule+"} introuvable", HttpStatus.BAD_REQUEST);
         }
 
         // Récupérer les notes depuis ms_notes
