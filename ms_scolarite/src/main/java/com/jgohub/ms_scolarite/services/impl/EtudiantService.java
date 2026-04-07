@@ -5,6 +5,7 @@ import com.jgohub.ms_scolarite.dto.Etudiant;
 import com.jgohub.ms_scolarite.entities.EtudiantEntity;
 import com.jgohub.ms_scolarite.exceptions.RequestException;
 import com.jgohub.ms_scolarite.mapping.EtudiantMapper;
+import com.jgohub.ms_scolarite.services.EtudiantProducer;
 import com.jgohub.ms_scolarite.services.IEtudiantService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,8 @@ public class EtudiantService implements IEtudiantService {
     private final IEtudiantRepository etudiantRepository;
     private final EtudiantMapper etudiantMapper;
     private final MessageSource messageSource;
+    // producer kafka
+    private final EtudiantProducer producer;
 
     @Override
     @Transactional(readOnly = true)
@@ -55,6 +58,20 @@ public class EtudiantService implements IEtudiantService {
         if (etudiantRepository.existsByMatricule(etudiant.getMatricule())) {
             throw new RequestException("Ce matricule existe déjà", HttpStatus.BAD_REQUEST);
         }
+
+
+        // Envoie a kafka
+        Etudiant event = new Etudiant();
+        event.setMatricule(etudiant.getMatricule());
+        event.setNom(etudiant.getNom());
+        event.setPrenom(etudiant.getPrenom());
+        event.setEmail(etudiant.getEmail());
+
+        producer.sendEtudiantCreated(event);
+
+        System.out.println("{\n" +
+                        "Event : \n" + event.toString() +
+                        "\n}");
 
         return etudiantMapper.toEtudiant(etudiantRepository.save(etudiant));
     }

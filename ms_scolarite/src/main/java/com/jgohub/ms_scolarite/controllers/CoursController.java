@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/scolarite/cours")
+@RequestMapping("/ms_scolarite/cours")
 @RequiredArgsConstructor
 public class CoursController {
 

@@ -1,4 +1,4 @@
-package com.jgohub.ms_bulletin.entities;
+package com.jgohub.ms_bulletin.dto;
 
 
 import jakarta.validation.constraints.NotBlank;
