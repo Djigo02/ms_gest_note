@@ -3,9 +3,9 @@ spring:
     name: ms_scolarite
 
   datasource:
-    url: jdbc:postgresql://${DB_HOST:localhost}:5432/${DB_NAME:ms_scolarite_db}
+    url: jdbc:postgresql://${DB_HOST:localhost}:5433/${DB_NAME:ms_scolarite_db}
     username: ${DB_USERNAME:postgres}
-    password: ${DB_PASSWORD:passer}
+    password: ${DB_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -17,7 +17,8 @@ spring:
         format_sql: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
   kafka:
-    bootstrap-servers: localhost:9092
+#    bootstrap-servers: localhost:9092
+    bootstrap-servers: kafka:29092
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
