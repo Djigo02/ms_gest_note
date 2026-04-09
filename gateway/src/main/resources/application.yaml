@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: gateway
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://${KEYCLOAK_HOST:45.134.226.100}:${KEYCLOAK_PORT:9090}/realms/${KEYCLOAK_REALM:examen_java}
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: ms_scolarite
+              uri: http://localhost:8081
+              predicates:
+                - Path=/ms_scolarite/**
+
+            - id: ms_notes
+              uri: http://localhost:8082
+              predicates:
+                - Path=/ms_notes/**
+
+            - id: ms_bulletin
+              uri: http://localhost:8083
+              predicates:
+                - Path=/ms_bulletin/**
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,gateway

@@ -1,0 +1,40 @@
+package com.jgohub.gateway.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
+import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.web.server.SecurityWebFilterChain;
+
+@Configuration
+@EnableReactiveMethodSecurity
+public class SecurityConfig {
+
+    @Bean
+    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
+
+        return http
+                // Désactiver CSRF (API REST)
+                .csrf(csrf -> csrf.disable())
+
+                // Configuration des accès
+                .authorizeExchange(exchange -> exchange
+
+                        // Routes publiques
+                        .pathMatchers("/actuator/**").permitAll()
+                        .pathMatchers("/auth/**").permitAll()
+                        .pathMatchers(HttpMethod.OPTIONS).permitAll()
+
+                        // Tout le reste nécessite un token
+                        .anyExchange().authenticated()
+                )
+
+                // Activation JWT (Keycloak)
+                .oauth2ResourceServer(oauth2 -> oauth2
+                        .jwt(jwtSpec -> {})
+                )
+
+                .build();
+    }
+}
