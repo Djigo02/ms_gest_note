@@ -7,24 +7,23 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://${KEYCLOAK_HOST:45.134.226.100}:${KEYCLOAK_PORT:9090}/realms/${KEYCLOAK_REALM:examen_java}
-
   cloud:
     gateway:
       server:
         webflux:
           routes:
             - id: ms_scolarite
-              uri: http://localhost:8081
+              uri: http://${MS_SCOLARITE_HOST:localhost}:${MS_SCOLARITE_PORT:8081}
               predicates:
                 - Path=/ms_scolarite/**
 
             - id: ms_notes
-              uri: http://localhost:8082
+              uri: http://${MS_NOTES_HOST:localhost}:${MS_NOTES_PORT:8082}
               predicates:
                 - Path=/ms_notes/**
 
             - id: ms_bulletin
-              uri: http://localhost:8083
+              uri: http://${MS_BULLETIN_HOST:localhost}:${MS_BULLETIN_PORT:8083}
               predicates:
                 - Path=/ms_bulletin/**
 
@@ -32,4 +31,4 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info,gateway
+        include: health,info
